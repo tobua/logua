@@ -1,6 +1,6 @@
 {
   "name": "logua",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Logging utility for node.",
   "main": "./index.js",
   "source": "./index.js",
@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "lint": "padua lint",
-    "publish": "padua publish",
+    "publidsh": "padua publish",
     "update": "padua update"
   },
   "dependencies": {
