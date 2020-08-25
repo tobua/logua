@@ -1,13 +1,21 @@
 import { readFileSync } from 'fs'
-import { join } from 'path'
+import { fileURLToPath } from 'url'
+import { join, dirname } from 'path'
 import chalk from 'chalk'
 
 let color = 'gray'
 let name = 'log'
 
 try {
+  // __dirname is missing with ES modules.
+  // https://stackoverflow.com/a/62892482/3185545
+  const sourcePackagePath = join(
+    dirname(fileURLToPath(import.meta.url)),
+    '../..'
+  )
+
   const packageJson = JSON.parse(
-    readFileSync(join(process.cwd(), 'package.json'))
+    readFileSync(join(sourcePackagePath, 'package.json'))
   )
 
   if (packageJson.name) {
