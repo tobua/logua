@@ -1,0 +1,47 @@
+{
+  "name": "logua",
+  "version": "1.0.0",
+  "description": "Logging utility for node.",
+  "main": "./index.js",
+  "source": "./index.js",
+  "types": "./index.d.ts",
+  "type": "module",
+  "scripts": {
+    "lint": "padua lint",
+    "publish": "padua publish",
+    "update": "padua update"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "prettier": "padua/configuration/.prettierrc.json",
+  "eslintConfig": {
+    "extends": "./node_modules/padua/configuration/eslint.cjs"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "./node_modules/padua/configuration/tsconfig.json"
+      }
+    },
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.jsx?$": [
+        "babel-jest",
+        {
+          "configFile": "./node_modules/padua/configuration/.babelrc"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "padua": "^0.0.4"
+  },
+  "engines": {
+    "node": ">= 13.2.0"
+  }
+}
