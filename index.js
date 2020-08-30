@@ -41,7 +41,9 @@ export default (message, type) => {
 
   if (type === 'warning') {
     // eslint-disable-next-line no-console
-    console.log(`${namespace} ${chalk.orange('Warning')} ${message}.\n`)
+    console.log(
+      `${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}.\n`
+    )
     return
   }
 
