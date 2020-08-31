@@ -17,7 +17,10 @@
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
-    "extends": "./node_modules/padua/configuration/eslint.cjs"
+    "extends": "./node_modules/padua/configuration/eslint.cjs",
+    "rules": {
+      "no-console": 0
+    }
   },
   "jest": {
     "globals": {
