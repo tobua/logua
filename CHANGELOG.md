@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.5](https://github.com/tobua/logua/compare/v1.0.4...v1.0.5) (2020-08-31)
+
+
+### Bug Fixes
+
+* **init:** use CWD by default and go back when init configured ([03a9454](https://github.com/tobua/logua/commit/03a94540097b7a6437dd72c66aaebf53052acd92))
+* **types:** manual fix as typescript support still missing ([d8d40fb](https://github.com/tobua/logua/commit/d8d40fb67e771dc9932b8a70c1bf7c206d8ecf0e))
+
 ### [1.0.4](https://github.com/tobua/logua/compare/v1.0.3...v1.0.4) (2020-08-30)
 
 
