@@ -1,35 +1,7 @@
-import { readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
-import { join, dirname } from 'path'
 import chalk from 'chalk'
 
 let color = 'gray'
 let name = 'log'
-
-const loadConfigurationFromPackage = (basePath) => {
-  try {
-    const packageJson = JSON.parse(readFileSync(join(basePath, 'package.json')))
-
-    if (packageJson.name) {
-      name = packageJson.name
-    }
-
-    if (packageJson.color) {
-      color = packageJson.color
-    }
-  } catch (_) {
-    // Using defaults.
-  }
-}
-
-// Best way I found to get the caller and get the configuration from it's package.
-// configure() below can be used to make it work for init and local packages.
-if (process.env._ && process.env._.includes('/.bin')) {
-  loadConfigurationFromPackage(process.env._.replace('/.bin', ''))
-} else {
-  // CWD as fallback, will not work properly anymore when published.
-  loadConfigurationFromPackage(process.cwd())
-}
 
 export const configure = (options) => {
   if (typeof options !== 'object') {
@@ -39,26 +11,6 @@ export const configure = (options) => {
       )} No options object provided to configure(options).`
     )
     return
-  }
-
-  if (options.init) {
-    try {
-      // __dirname is missing with ES modules.
-      // https://stackoverflow.com/a/62892482/3185545
-      const dirnameImport = join(
-        dirname(fileURLToPath(import.meta.url)),
-        // Need to go back to find the package when used with npm init.
-        '../..'
-      )
-
-      loadConfigurationFromPackage(dirnameImport)
-    } catch (_) {
-      // Using defaults.
-    }
-  }
-
-  if (options.cwd) {
-    loadConfigurationFromPackage(process.cwd())
   }
 
   if (options.name) {

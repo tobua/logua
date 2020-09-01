@@ -4,10 +4,13 @@
 
 # logua
 
-Logging utility for node. Displays colored package namespace in front and exits on error. Dot and newline at the end of every message.
+Logging utility for node. Displays colored package namespace in front and exits on error. Unless message ends in ".!?\n" a dot will be added to the end.
 
 ```js
-import log from 'logua'
+import log, { configure } from 'logua'
+
+// Configure name and color before making any calls to log().
+configure({ name: 'my-pkg', color: 'blue' })
 
 log(`Found ${files} files`)
 
@@ -23,33 +26,4 @@ log('package.json file is missing', 'error')
 // => exits the process!
 ```
 
-configure the name and color in your `package.json`
-
-```json
-{
-  "name": "my-pkg",
-  "color": "red"
-}
-```
-
 Available colors can be found in the [chalk](https://www.npmjs.com/chalk) package.
-
-## configure
-
-```js
-#!/usr/bin/env node
-
-import log, { configure } from 'logua'
-
-configure({
-  // Finds the package when run through 'npm init'.
-  init: true,
-  // Gets the correct package when used locally.
-  cwd: false,
-  // Optionally set the name and color here instead of getting it from the package.
-  name: 'my-package',
-  color: 'blue',
-})
-
-log('Running this through an init script!')
-```
