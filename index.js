@@ -22,8 +22,14 @@ const loadConfigurationFromPackage = (basePath) => {
   }
 }
 
-// If package imported regularly get config from CWD.
-loadConfigurationFromPackage(process.cwd())
+// Best way I found to get the caller and get the configuration from it's package.
+// configure() below can be used to make it work for init and local packages.
+if (process.env._ && process.env._.includes('/.bin')) {
+  loadConfigurationFromPackage(process.env._.replace('/.bin', ''))
+} else {
+  // CWD as fallback, will not work properly anymore when published.
+  loadConfigurationFromPackage(process.cwd())
+}
 
 export const configure = (options) => {
   if (typeof options !== 'object') {
@@ -49,6 +55,10 @@ export const configure = (options) => {
     } catch (_) {
       // Using defaults.
     }
+  }
+
+  if (options.cwd) {
+    loadConfigurationFromPackage(process.cwd())
   }
 
   if (options.name) {

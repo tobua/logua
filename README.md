@@ -34,18 +34,22 @@ configure the name and color in your `package.json`
 
 Available colors can be found in the [chalk](https://www.npmjs.com/chalk) package.
 
-## npm init
-
-To find the configurations when used through `npm init` call this option before logging.
+## configure
 
 ```js
 #!/usr/bin/env node
 
 import log, { configure } from 'logua'
 
-configure({ init: true })
+configure({
+  // Finds the package when run through 'npm init'.
+  init: true,
+  // Gets the correct package when used locally.
+  cwd: false,
+  // Optionally set the name and color here instead of getting it from the package.
+  name: 'my-package',
+  color: 'blue',
+})
 
 log('Running this through an init script!')
 ```
-
-It's also possible to configure name and color this way.

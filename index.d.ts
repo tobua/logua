@@ -1,6 +1,7 @@
 // Reference: https://www.typescriptlang.org/play
 interface IOptions {
   init?: boolean;
+  cwd?: boolean;
   name?: string;
   color?: string;
 }
