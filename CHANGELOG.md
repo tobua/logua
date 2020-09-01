@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/tobua/logua/compare/v1.0.5...v1.0.6) (2020-09-01)
+
+
+### Bug Fixes
+
+* **package:** best way to get caller with modules and CWD option ([bd5628c](https://github.com/tobua/logua/commit/bd5628c36e75a87e44b478e0ca3f4d6a750d8bd6))
+
 ### [1.0.5](https://github.com/tobua/logua/compare/v1.0.4...v1.0.5) (2020-08-31)
 
 
