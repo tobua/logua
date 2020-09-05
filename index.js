@@ -1,28 +1,6 @@
 import chalk from 'chalk'
 
-let color = 'gray'
-let name = 'log'
-
-export const configure = (options) => {
-  if (typeof options !== 'object') {
-    console.log(
-      `${chalk.gray.bold('logua')} ${chalk.red.bold(
-        'Error'
-      )} No options object provided to configure(options).`
-    )
-    return
-  }
-
-  if (options.name) {
-    name = options.name
-  }
-
-  if (options.color) {
-    color = options.color
-  }
-}
-
-export default (message, type) => {
+const log = (message, type, name, color) => {
   const namespace = chalk[color].bold(name)
 
   // If no other punctuation provided all messages will end like a regular sentence.
@@ -43,4 +21,19 @@ export default (message, type) => {
   }
 
   console.log(`${namespace} ${message}${end}\n`)
+}
+
+// returns a log(message, type) method with the current context.
+// Context for logs will be stored in this scope.
+// Reading them from package.json or using global store didn't work.
+export const create = (name, color = 'gray') => {
+  if (!name) {
+    console.log(
+      `${chalk.gray.bold('logua')} ${chalk.red.bold(
+        'Error'
+      )} No name provided to create(name, [color]).`
+    )
+  }
+
+  return (message, type) => log(message, type, name, color)
 }

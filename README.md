@@ -7,10 +7,10 @@
 Logging utility for node. Displays colored package namespace in front and exits on error. Unless message ends in ".!?\n" a dot will be added to the end.
 
 ```js
-import log, { configure } from 'logua'
+import { create } from 'logua'
 
-// Configure name and color before making any calls to log().
-configure({ name: 'my-pkg', color: 'blue' })
+// First create the log with the package context.
+const log = create('my-pkg', 'blue')
 
 log(`Found ${files} files`)
 
@@ -27,3 +27,23 @@ log('package.json file is missing', 'error')
 ```
 
 Available colors can be found in the [chalk](https://www.npmjs.com/chalk) package.
+
+## Separate file
+
+```js
+// log.js
+
+import { create } from 'logua'
+
+export const log = create('some-pkg', 'red')
+```
+
+Then import the contextualized log:
+
+```js
+import { log } from './log.js'
+
+log('Hello World')
+
+// => some-pkg Hello World.
+```
