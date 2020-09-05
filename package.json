@@ -1,6 +1,6 @@
 {
   "name": "logua",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "Logging utility for node.",
   "type": "module",
   "main": "./index.js",
@@ -42,7 +42,7 @@
     "chalk": "^4.1.0"
   },
   "devDependencies": {
-    "padua": "^0.0.6"
+    "padua": "^0.0.8"
   },
   "engines": {
     "node": ">= 13.2.0"

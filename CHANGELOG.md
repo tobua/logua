@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/tobua/logua/compare/v1.0.7...v2.0.0) (2020-09-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **context:** create(name, color) method needs to be called to get the log
+
+### Features
+
+* **context:** use factory method to store log context ([0ed2893](https://github.com/tobua/logua/commit/0ed28933c2ca05a2481bb5ba377451acc9d6b9ec))
+
 ### [1.0.7](https://github.com/tobua/logua/compare/v1.0.6...v1.0.7) (2020-09-01)
 
 
