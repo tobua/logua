@@ -1,8 +1,11 @@
 // Reference: https://www.typescriptlang.org/play
+type Type = 'warning' | 'error'
 interface IOptions {
-  name?: string;
-  color?: string;
+  name?: string
+  color?: string
+  type?: Type
 }
-export declare const configure: (options: IOptions) => void
-declare const _default: (message: string, type?: string) => void
-export default _default
+export declare const create: (
+  name: string,
+  color?: string
+) => (message: string, options: Type | IOptions) => void

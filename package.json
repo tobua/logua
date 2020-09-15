@@ -11,9 +11,7 @@
     "index.d.ts"
   ],
   "scripts": {
-    "lint": "padua lint",
-    "release": "padua publish",
-    "update": "padua update"
+    "test": "padua test"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
@@ -42,7 +40,7 @@
     "chalk": "^4.1.0"
   },
   "devDependencies": {
-    "padua": "^0.0.8"
+    "padua": "^0.0.9"
   },
   "engines": {
     "node": ">= 13.2.0"

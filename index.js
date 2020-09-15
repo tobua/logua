@@ -1,19 +1,19 @@
 import chalk from 'chalk'
 
-const log = (message, type, name, color) => {
-  const namespace = chalk[color].bold(name)
+const log = (message, options) => {
+  const namespace = chalk[options.color].bold(options.name)
 
   // If no other punctuation provided all messages will end like a regular sentence.
   const last = message.slice(-1)
   const end = ['.', '!', '?', '\n'].includes(last) ? '' : '.'
 
-  if (type === 'error') {
+  if (options.type === 'error') {
     console.log(`${namespace} ${chalk.red.bold('Error')} ${message}${end}\n`)
     process.exit(0)
     return
   }
 
-  if (type === 'warning') {
+  if (options.type === 'warning') {
     console.log(
       `${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}${end}\n`
     )
@@ -35,5 +35,17 @@ export const create = (name, color = 'gray') => {
     )
   }
 
-  return (message, type) => log(message, type, name, color)
+  return (message, options) => {
+    const defaultOptions = {
+      name,
+      color,
+      type: options,
+    }
+
+    if (typeof options === 'object') {
+      Object.assign(defaultOptions, options)
+    }
+
+    log(message, defaultOptions)
+  }
 }
