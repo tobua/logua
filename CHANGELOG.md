@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/tobua/logua/compare/v2.0.1...v2.1.0) (2020-09-16)
+
+
+### Features
+
+* **group:** messages can be grouped ([9ca9f5d](https://github.com/tobua/logua/commit/9ca9f5d8a99c732a91d08ff421032b2aadadf90a))
+
 ### [2.0.1](https://github.com/tobua/logua/compare/v2.0.0...v2.0.1) (2020-09-15)
 
 ## [2.0.0](https://github.com/tobua/logua/compare/v1.0.7...v2.0.0) (2020-09-05)
