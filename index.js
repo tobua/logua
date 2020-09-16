@@ -1,5 +1,7 @@
 import chalk from 'chalk'
-import { debounce } from 'debounce'
+import debouncePkg from 'debounce'
+
+const { debounce } = debouncePkg
 
 const log = (message, options) => {
   const namespace = chalk[options.color].bold(options.name)
