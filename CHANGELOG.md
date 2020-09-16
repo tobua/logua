@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/tobua/logua/compare/v2.1.0...v2.1.1) (2020-09-16)
+
+
+### Bug Fixes
+
+* **import:** fix for CommonJS import of package ([7ba764f](https://github.com/tobua/logua/commit/7ba764f998b09f143c0847722aa12bf184962f13))
+
 ## [2.1.0](https://github.com/tobua/logua/compare/v2.0.1...v2.1.0) (2020-09-16)
 
 
