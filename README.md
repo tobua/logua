@@ -47,3 +47,24 @@ log('Hello World')
 
 // => some-pkg Hello World.
 ```
+
+## Grouping messages
+
+To avoid spamming the log messages can be grouped. After a timeout a single message will be output instead of various messages.
+
+```js
+const files = ['hello.js', 'world.js', 'more-files.js']
+
+files.forEach((file) =>
+  log(`Copying ${file}`, {
+    // Some identifier for the group.
+    group: 'copy',
+    // Group message, used if there is more than one log for this id during the timeout.
+    message: (count) => `Copying ${count} files`,
+    // Optional timeout until messages are collected.
+    timeout: 100,
+  })
+)
+
+// => Copying 3 files.
+```

@@ -2,6 +2,8 @@
   "name": "logua",
   "version": "2.0.1",
   "description": "Logging utility for node.",
+  "repository": "github:tobua/logua",
+  "license": "MIT",
   "type": "module",
   "main": "./index.js",
   "source": "./index.js",
@@ -37,7 +39,8 @@
     }
   },
   "dependencies": {
-    "chalk": "^4.1.0"
+    "chalk": "^4.1.0",
+    "debounce": "^1.2.0"
   },
   "devDependencies": {
     "padua": "^0.0.9"

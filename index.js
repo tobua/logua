@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import { debounce } from 'debounce'
 
 const log = (message, options) => {
   const namespace = chalk[options.color].bold(options.name)
@@ -23,6 +24,25 @@ const log = (message, options) => {
   console.log(`${namespace} ${message}${end}\n`)
 }
 
+const Groups = new Map()
+
+const groupLog = (singleMessage, options) => {
+  const { count } = Groups.get(options.group)
+  let { message } = options
+
+  if (count < 2) {
+    message = singleMessage
+  }
+
+  if (count > 1 && typeof message === 'function') {
+    message = message(count)
+  }
+
+  Groups.delete(options.group)
+
+  log(message, options)
+}
+
 // returns a log(message, type) method with the current context.
 // Context for logs will be stored in this scope.
 // Reading them from package.json or using global store didn't work.
@@ -35,7 +55,7 @@ export const create = (name, color = 'gray') => {
     )
   }
 
-  return (message, options) => {
+  return function logMessage(message, options) {
     const defaultOptions = {
       name,
       color,
@@ -44,6 +64,21 @@ export const create = (name, color = 'gray') => {
 
     if (typeof options === 'object') {
       Object.assign(defaultOptions, options)
+    }
+
+    if (typeof options === 'object' && options.group) {
+      // Create debounced group function if not yet existing.
+      if (!Groups.has(options.group)) {
+        Groups.set(options.group, {
+          handler: debounce(groupLog, options.timeout || 50),
+          count: 1,
+        })
+      } else {
+        Groups.get(options.group).count += 1
+      }
+      // Call debounced group log method.
+      Groups.get(options.group).handler(message, defaultOptions)
+      return
     }
 
     log(message, defaultOptions)
