@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/tobua/logua/compare/v2.1.1...v2.1.2) (2020-11-12)
+
+
+### Bug Fixes
+
+* **message:** prevent error if used with non-string object ([84b5308](https://github.com/tobua/logua/commit/84b5308fa8c6f67e174521b81431c945dc8a5a92))
+
 ### [2.1.1](https://github.com/tobua/logua/compare/v2.1.0...v2.1.1) (2020-09-16)
 
 
