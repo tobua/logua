@@ -1,25 +1,39 @@
 {
   "name": "logua",
-  "version": "2.1.1",
   "description": "Logging utility for node.",
+  "version": "2.1.1",
   "repository": "github:tobua/logua",
   "license": "MIT",
+  "scripts": {
+    "test": "padua test"
+  },
+  "padua": {
+    "source": true
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "debounce": "^1.2.0"
+  },
   "type": "module",
-  "main": "./index.js",
-  "source": "./index.js",
-  "types": "./index.d.ts",
+  "main": "index.js",
+  "source": "index.js",
+  "types": "index.d.ts",
   "files": [
     "index.js",
     "index.d.ts"
   ],
-  "scripts": {
-    "test": "padua test"
+  "devDependencies": {
+    "padua": "^0.1.4"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
     "extends": "./node_modules/padua/configuration/eslint.cjs",
     "rules": {
-      "no-console": 0
+      "no-console": 0,
+      "import/extensions": [
+        2,
+        "always"
+      ]
     }
   },
   "jest": {
@@ -29,21 +43,14 @@
       }
     },
     "transform": {
-      "^.+\\.tsx?$": "ts-jest",
       "^.+\\.jsx?$": [
         "babel-jest",
         {
           "configFile": "./node_modules/padua/configuration/.babelrc"
         }
-      ]
+      ],
+      "^.+\\.tsx?$": "ts-jest"
     }
-  },
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "debounce": "^1.2.0"
-  },
-  "devDependencies": {
-    "padua": "^0.0.9"
   },
   "engines": {
     "node": ">= 13.2.0"

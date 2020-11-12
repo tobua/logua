@@ -7,7 +7,7 @@ const log = (message, options) => {
   const namespace = chalk[options.color].bold(options.name)
 
   // If no other punctuation provided all messages will end like a regular sentence.
-  const last = message.slice(-1)
+  const last = typeof message === 'string' ? message.slice(-1) : '.'
   const end = ['.', '!', '?', '\n'].includes(last) ? '' : '.'
 
   if (options.type === 'error') {
