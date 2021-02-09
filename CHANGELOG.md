@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/tobua/logua/compare/v2.1.2...v2.1.3) (2021-02-09)
+
+
+### Bug Fixes
+
+* **console:** use warn and error logs when appropriate ([52a5549](https://github.com/tobua/logua/commit/52a5549e9e78a27b28d3e77d603b2d1e1576640b))
+
 ### [2.1.2](https://github.com/tobua/logua/compare/v2.1.1...v2.1.2) (2020-11-12)
 
 
