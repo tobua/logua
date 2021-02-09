@@ -1,9 +1,12 @@
-import { create } from '../index'
+import { create } from '../index.js'
 
-const console = jest.spyOn(global.console, 'log')
+const messages = []
 
-const getLastLogMessage = () =>
-  console.mock.calls[console.mock.calls.length - 1][0]
+jest
+  .spyOn(global.console, 'log')
+  .mockImplementation((message) => messages.push(message))
+
+const getLastMessage = () => messages[messages.length - 1]
 
 jest.useFakeTimers()
 
@@ -25,7 +28,7 @@ test('Logs can be grouped.', () => {
 
   jest.runAllTimers()
 
-  expect(getLastLogMessage().includes('Copying 3 files')).toBeTruthy()
+  expect(getLastMessage().includes('Copying 3 files')).toBeTruthy()
 })
 
 test('Group count is cleared after timeout.', () => {
@@ -46,7 +49,7 @@ test('Group count is cleared after timeout.', () => {
 
   jest.runAllTimers()
 
-  expect(getLastLogMessage().includes('Copying 3 files')).toBeTruthy()
+  expect(getLastMessage().includes('Copying 3 files')).toBeTruthy()
 
   log('Copying file Hello.js', {
     group: 1,
@@ -59,7 +62,7 @@ test('Group count is cleared after timeout.', () => {
 
   jest.runAllTimers()
 
-  expect(getLastLogMessage().includes('Copying 2 files')).toBeTruthy()
+  expect(getLastMessage().includes('Copying 2 files')).toBeTruthy()
 })
 
 test('Single message will not be grouped.', () => {
@@ -72,7 +75,7 @@ test('Single message will not be grouped.', () => {
 
   jest.runAllTimers()
 
-  expect(getLastLogMessage().includes('Copying file Hello.js')).toBeTruthy()
+  expect(getLastMessage().includes('Copying file Hello.js')).toBeTruthy()
 })
 
 test('Different group ids will not be mixed.', () => {
@@ -97,5 +100,5 @@ test('Different group ids will not be mixed.', () => {
 
   jest.runAllTimers()
 
-  expect(getLastLogMessage().includes('Copying 2 files')).toBeTruthy()
+  expect(getLastMessage().includes('Copying 2 files')).toBeTruthy()
 })

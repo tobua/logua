@@ -11,13 +11,13 @@ const log = (message, options) => {
   const end = ['.', '!', '?', '\n'].includes(last) ? '' : '.'
 
   if (options.type === 'error') {
-    console.log(`${namespace} ${chalk.red.bold('Error')} ${message}${end}\n`)
+    console.error(`${namespace} ${chalk.red.bold('Error')} ${message}${end}\n`)
     process.exit(0)
     return
   }
 
   if (options.type === 'warning') {
-    console.log(
+    console.warn(
       `${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}${end}\n`
     )
     return
@@ -50,7 +50,7 @@ const groupLog = (singleMessage, options) => {
 // Reading them from package.json or using global store didn't work.
 export const create = (name, color = 'gray') => {
   if (!name) {
-    console.log(
+    console.error(
       `${chalk.gray.bold('logua')} ${chalk.red.bold(
         'Error'
       )} No name provided to create(name, [color]).`

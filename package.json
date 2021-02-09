@@ -23,7 +23,7 @@
     "index.d.ts"
   ],
   "devDependencies": {
-    "padua": "^0.1.4"
+    "padua": "^0.2.5"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
@@ -32,27 +32,21 @@
       "no-console": 0,
       "import/extensions": [
         2,
-        "always"
+        "ignorePackages"
       ]
     }
   },
   "jest": {
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "./node_modules/padua/configuration/tsconfig.json"
-      }
-    },
     "transform": {
       "^.+\\.jsx?$": [
         "babel-jest",
         {
           "configFile": "./node_modules/padua/configuration/.babelrc"
         }
-      ],
-      "^.+\\.tsx?$": "ts-jest"
+      ]
     }
   },
   "engines": {
-    "node": ">= 13.2.0"
+    "node": ">= 14"
   }
 }
