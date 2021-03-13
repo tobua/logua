@@ -8,4 +8,4 @@ interface IOptions {
 export declare const create: (
   name: string,
   color?: string
-) => (message: string, options: Type | IOptions) => void
+) => (message: string, options?: Type | IOptions) => void

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "debounce": "^1.2.0"
+    "debounce": "^1.2.1"
   },
   "type": "module",
   "main": "index.js",
@@ -23,7 +23,7 @@
     "index.d.ts"
   ],
   "devDependencies": {
-    "padua": "^0.2.5"
+    "padua": "^0.3.0"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
