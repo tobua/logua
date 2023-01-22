@@ -9,21 +9,20 @@ const log = (message, options) => {
   // If no other punctuation provided all messages will end like a regular sentence.
   const last = typeof message === 'string' ? message.slice(-1) : '.'
   const end = ['.', '!', '?', '\n'].includes(last) ? '' : '.'
+  const newLine = options.newLine ? '\n' : ''
 
   if (options.type === 'error') {
-    console.error(`${namespace} ${chalk.red.bold('Error')} ${message}${end}\n`)
+    console.error(`${namespace} ${chalk.red.bold('Error')} ${message}${end}${newLine}`)
     process.exit(0)
     return
   }
 
   if (options.type === 'warning') {
-    console.warn(
-      `${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}${end}\n`
-    )
+    console.warn(`${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}${end}${newLine}`)
     return
   }
 
-  console.log(`${namespace} ${message}${end}\n`)
+  console.log(`${namespace} ${message}${end}${newLine}`)
 }
 
 const Groups = new Map()
@@ -48,7 +47,7 @@ const groupLog = (singleMessage, options) => {
 // returns a log(message, type) method with the current context.
 // Context for logs will be stored in this scope.
 // Reading them from package.json or using global store didn't work.
-export const create = (name, color = 'gray') => {
+export const create = (name, color = 'gray', newLine = false) => {
   if (!name) {
     console.error(
       `${chalk.gray.bold('logua')} ${chalk.red.bold(
@@ -62,6 +61,7 @@ export const create = (name, color = 'gray') => {
       name,
       color,
       type: options,
+      newLine,
     }
 
     if (typeof options === 'object') {

@@ -1,7 +1,7 @@
 {
   "name": "logua",
   "description": "Logging utility for node.",
-  "version": "2.1.4",
+  "version": "0.0.0-development",
   "repository": "github:tobua/logua",
   "license": "MIT",
   "scripts": {
@@ -11,20 +11,30 @@
     "source": true
   },
   "dependencies": {
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.2",
     "debounce": "^1.2.1"
   },
   "type": "module",
+  "sideEffects": true,
   "main": "index.js",
-  "sideEffects": false,
+  "exports": {
+    ".": "./index.js"
+  },
   "source": "index.js",
   "types": "index.d.ts",
   "files": [
     "index.js",
     "index.d.ts"
   ],
+  "keywords": [
+    "log",
+    "node",
+    "logging",
+    "color"
+  ],
   "devDependencies": {
-    "padua": "^0.3.0"
+    "padua": "^1.1.0",
+    "strip-ansi": "^7.0.1"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
@@ -45,9 +55,12 @@
           "configFile": "./node_modules/padua/configuration/.babelrc"
         }
       ]
-    }
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!strip-ansi|ansi-regex).*/"
+    ]
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 16"
   }
 }

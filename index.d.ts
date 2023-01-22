@@ -4,8 +4,10 @@ interface IOptions {
   name?: string
   color?: string
   type?: Type
+  newLine?: boolean
 }
 export declare const create: (
   name: string,
-  color?: string
+  color?: string,
+  newLine?: boolean
 ) => (message: string, options?: Type | IOptions) => void

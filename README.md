@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/tobua/logua/raw/master/logo.png" alt="logua" width="300">
+  <img src="https://github.com/tobua/logua/raw/main/logo.png" alt="logua" width="300">
 </p>
 
 # logua
@@ -67,4 +67,14 @@ files.forEach((file) =>
 )
 
 // => Copying 3 files.
+```
+
+## Further Options
+
+By default a newline will be added after each message. This can be changed globally or for each single log.
+
+```js
+const log = create('my-pkg', 'blue', false) // newLine = false
+
+log('Hello World', { newLine: true }) // Force newLine for this message.
 ```

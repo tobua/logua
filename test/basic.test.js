@@ -1,3 +1,4 @@
+import stripAnsi from 'strip-ansi'
 import { create } from '../index.js'
 
 const messages = []
@@ -83,4 +84,26 @@ test('Punctuation is adapted properly.', () => {
   log('Question?')
   expect(getLastMessage().includes('Question?')).toBeTruthy()
   expect(getLastMessage().includes('Question?.')).toBeFalsy()
+})
+
+test('Additional new-line can be disabled.', () => {
+  const log = create('scope', 'green', false)
+
+  log('Will not add additional new-line')
+  expect(stripAnsi(getLastMessage())).toEqual('scope Will not add additional new-line.')
+  expect(getLastMessage().includes('\n')).toBeFalsy()
+
+  log('Will add additional new-line', { newLine: true })
+  expect(stripAnsi(getLastMessage())).toEqual('scope Will add additional new-line.\n')
+  expect(getLastMessage().includes('\n')).toBeTruthy()
+
+  const newLineLog = create('scope', 'blue', true)
+
+  newLineLog('Will add additional new-line')
+  expect(stripAnsi(getLastMessage())).toEqual('scope Will add additional new-line.\n')
+  expect(getLastMessage().includes('\n')).toBeTruthy()
+
+  newLineLog('Will not add additional new-line', { newLine: false })
+  expect(stripAnsi(getLastMessage())).toEqual('scope Will not add additional new-line.')
+  expect(getLastMessage().includes('\n')).toBeFalsy()
 })
