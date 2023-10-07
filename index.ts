@@ -5,7 +5,7 @@ const { debounce } = debouncePkg
 
 type Type = 'warning' | 'error'
 
-interface Options {
+export interface Options {
   name?: string
   color?: string
   type?: Type
