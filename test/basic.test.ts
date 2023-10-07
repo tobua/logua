@@ -1,20 +1,24 @@
+import { test, expect, vi } from 'vitest'
 import stripAnsi from 'strip-ansi'
-import { create } from '../index.js'
+import { create } from '../index'
 
-const messages = []
+// @ts-ignore
+global.console.new = global.console.log
 
-const console = jest
+const messages: string[] = []
+
+const console = vi
   .spyOn(global.console, 'log')
   .mockImplementation((message) => messages.push(message))
-const consoleWarn = jest
+const consoleWarn = vi
   .spyOn(global.console, 'warn')
   .mockImplementation((message) => messages.push(message))
-const consoleError = jest
+const consoleError = vi
   .spyOn(global.console, 'error')
   .mockImplementation((message) => messages.push(message))
 
 // No actual exit on error.
-const exit = jest.spyOn(process, 'exit').mockImplementation(() => {})
+const exit = vi.spyOn(process, 'exit').mockImplementation((() => {}) as () => never)
 
 const getLastMessage = () => messages[messages.length - 1]
 

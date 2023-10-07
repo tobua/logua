@@ -3,7 +3,22 @@ import debouncePkg from 'debounce'
 
 const { debounce } = debouncePkg
 
-const log = (message, options) => {
+type Type = 'warning' | 'error'
+
+interface Options {
+  name?: string
+  color?: string
+  type?: Type
+  newLine?: boolean
+  group?: string | number,
+  groupMessage?: ((count: number) => string) | string
+  timeout?: number
+}
+
+const log = (
+  message: string,
+  options: { name: string; color: string; type?: Type; newLine: boolean },
+) => {
   const namespace = chalk[options.color].bold(options.name)
 
   // If no other punctuation provided all messages will end like a regular sentence.
@@ -13,8 +28,12 @@ const log = (message, options) => {
 
   if (options.type === 'error') {
     console.error(`${namespace} ${chalk.red.bold('Error')} ${message}${end}${newLine}`)
-    process.exit(0)
-    return
+    if (typeof process !== 'undefined') {
+      process.exit(0)
+    } else {
+      throw new Error(message)
+    }
+    return // Necessary for tests.
   }
 
   if (options.type === 'warning') {
@@ -25,11 +44,11 @@ const log = (message, options) => {
   console.log(`${namespace} ${message}${end}${newLine}`)
 }
 
-const Groups = new Map()
+const Groups = new Map<string | number, { handler: Function; count: number }>()
 
-const groupLog = (singleMessage, options) => {
+const groupLog = (singleMessage: string, options: Options ) => {
   const { count } = Groups.get(options.group)
-  let { message } = options
+  let message = options.groupMessage as ((count: number) => string) | string
 
   if (count < 2) {
     message = singleMessage
@@ -41,26 +60,26 @@ const groupLog = (singleMessage, options) => {
 
   Groups.delete(options.group)
 
-  log(message, options)
+  log(message as string, options as any)
 }
 
 // returns a log(message, type) method with the current context.
 // Context for logs will be stored in this scope.
 // Reading them from package.json or using global store didn't work.
-export const create = (name, color = 'gray', newLine = false) => {
+export const create = (name: string, color = 'gray', newLine = false) => {
   if (!name) {
     console.error(
       `${chalk.gray.bold('logua')} ${chalk.red.bold(
-        'Error'
-      )} No name provided to create(name, [color]).`
+        'Error',
+      )} No name provided to create(name, color = 'gray', newLine = false).`,
     )
   }
 
-  return function logMessage(message, options) {
+  return function logMessage(message: string, options?: Type | Options) {
     const defaultOptions = {
       name,
       color,
-      type: options,
+      type: !options || typeof options === 'string' ? options as Type : options.type,
       newLine,
     }
 

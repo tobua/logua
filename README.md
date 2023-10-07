@@ -4,7 +4,7 @@
 
 # logua
 
-Logging utility for node. Displays colored package namespace in front and exits on error. Unless message ends in ".!?\n" a dot will be added to the end.
+Logging utility for node and the browser. Displays colored package namespace in front and exits on error. Unless message ends in ".!?\n" a dot will be added to the end.
 
 ```js
 import { create } from 'logua'
@@ -60,10 +60,11 @@ files.forEach((file) =>
     // Some identifier for the group.
     group: 'copy',
     // Group message, used if there is more than one log for this id during the timeout.
-    message: (count) => `Copying ${count} files`,
+    groupMessage: (count: number) => `Copying ${count} files`,
+    groupMessage: 'Files copied successfully',
     // Optional timeout until messages are collected.
     timeout: 100,
-  })
+  }),
 )
 
 // => Copying 3 files.
