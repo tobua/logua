@@ -26,7 +26,7 @@ log('package.json file is missing', 'error')
 // => exits the process!
 ```
 
-Available colors can be found in the [chalk](https://www.npmjs.com/chalk) package.
+The following colors are available: black, red, green, yellow, blue, magenta, cyan, white, gray, grey, redBright, greenBright, yellowBright, blueBright, magentaBright, cyanBright, whiteBright, darkOrange, orange
 
 ## Separate file
 

@@ -1,25 +1,25 @@
-import chalk from 'chalk'
-import debouncePkg from 'debounce'
+import debounce from 'debounce'
+import { textColor, bold, Color } from './ansi'
 
-const { debounce } = debouncePkg
+export type { Color }
 
 type Type = 'warning' | 'error'
 
 export interface Options {
   name?: string
-  color?: string
+  color?: Color
   type?: Type
   newLine?: boolean
-  group?: string | number,
+  group?: string | number
   groupMessage?: ((count: number) => string) | string
   timeout?: number
 }
 
 const log = (
   message: string,
-  options: { name: string; color: string; type?: Type; newLine: boolean },
+  options: { name: string; color: Color; type?: Type; newLine: boolean },
 ) => {
-  const namespace = chalk[options.color].bold(options.name)
+  const namespace = textColor(options.color, bold(options.name))
 
   // If no other punctuation provided all messages will end like a regular sentence.
   const last = typeof message === 'string' ? message.slice(-1) : '.'
@@ -27,7 +27,7 @@ const log = (
   const newLine = options.newLine ? '\n' : ''
 
   if (options.type === 'error') {
-    console.error(`${namespace} ${chalk.red.bold('Error')} ${message}${end}${newLine}`)
+    console.error(`${namespace} ${textColor('red', bold('Error'))} ${message}${end}${newLine}`)
     if (typeof process !== 'undefined') {
       process.exit(0)
     } else {
@@ -37,7 +37,7 @@ const log = (
   }
 
   if (options.type === 'warning') {
-    console.warn(`${namespace} ${chalk.rgb(255, 140, 0)('Warning')} ${message}${end}${newLine}`)
+    console.warn(`${namespace} ${textColor('darkOrange', 'Warning')} ${message}${end}${newLine}`)
     return
   }
 
@@ -46,7 +46,7 @@ const log = (
 
 const Groups = new Map<string | number, { handler: Function; count: number }>()
 
-const groupLog = (singleMessage: string, options: Options ) => {
+const groupLog = (singleMessage: string, options: Options) => {
   const { count } = Groups.get(options.group)
   let message = options.groupMessage as ((count: number) => string) | string
 
@@ -66,11 +66,12 @@ const groupLog = (singleMessage: string, options: Options ) => {
 // returns a log(message, type) method with the current context.
 // Context for logs will be stored in this scope.
 // Reading them from package.json or using global store didn't work.
-export const create = (name: string, color = 'gray', newLine = false) => {
+export const create = (name: string, color: Color = 'gray', newLine = false) => {
   if (!name) {
     console.error(
-      `${chalk.gray.bold('logua')} ${chalk.red.bold(
-        'Error',
+      `${textColor('gray', bold('logua'))} ${textColor(
+        'red',
+        bold('Error'),
       )} No name provided to create(name, color = 'gray', newLine = false).`,
     )
   }
@@ -79,7 +80,7 @@ export const create = (name: string, color = 'gray', newLine = false) => {
     const defaultOptions = {
       name,
       color,
-      type: !options || typeof options === 'string' ? options as Type : options.type,
+      type: !options || typeof options === 'string' ? (options as Type) : options.type,
       newLine,
     }
 

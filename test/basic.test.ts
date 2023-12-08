@@ -111,3 +111,13 @@ test('Additional new-line can be disabled.', () => {
   expect(stripAnsi(getLastMessage())).toEqual('scope Will not add additional new-line.')
   expect(getLastMessage().includes('\n')).toBeFalsy()
 })
+
+test('Proper color types.', () => {
+  const log = create('hello', 'red')
+  log('Is there a namespace?', { color: 'blue' })
+
+  // @ts-expect-error
+  const anotherLog = create('hello', 'missingRed')
+  // @ts-expect-error
+  anotherLog('Is there a namespace?', { color: 'blueMissing' })
+})
